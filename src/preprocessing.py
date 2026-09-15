@@ -12,8 +12,8 @@ def load_data(path):
 
 def build_preprocessor(df):
     X = df.drop(columns="Churn")
-    num_cols = X.selectdtypes(include="number").columns.tolist()
-    cat_cols = X.selectdtypes(include="object").columns.tolist()
+    num_cols = X.select_dtypes(include="number").columns.tolist()
+    cat_cols = X.select_dtypes(include="object").columns.tolist()
 
     num_pipe = Pipeline([
         ("impute", SimpleImputer(strategy="median")),
@@ -22,7 +22,7 @@ def build_preprocessor(df):
 
     cat_pipe = Pipeline([
         ("impute", SimpleImputer(strategy="most_frequent")),
-        ("scale", OneHotEncoder(handle_unknown="ignore"))
+        ("onehot", OneHotEncoder(handle_unknown="ignore"))
     ])
 
     # ColumnTransformer takes the tuple ("transformerName", transformer, columns) for each subset you pass of the dataframe
