@@ -35,10 +35,18 @@ total = neg + pos
 class_weights = {0: total/(2*neg), 1: total/(2*pos)}
 
 def build_model(input_dim):
+    # model = keras.Sequential([
+    #     keras.layers.Input(shape=(input_dim,)),
+    #     keras.layers.Dense(64, activation="relu"),
+    #     keras.layers.Dense(32, activation="relu"),
+    #     keras.layers.Dense(1, activation="sigmoid"),
+    # ])
     model = keras.Sequential([
         keras.layers.Input(shape=(input_dim,)),
         keras.layers.Dense(64, activation="relu"),
+        keras.layers.Dropout(0.3),
         keras.layers.Dense(32, activation="relu"),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(1, activation="sigmoid"),
     ])
     
