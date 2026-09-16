@@ -8,3 +8,5 @@ mlruns/
 models/*.pkl
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+*.png
+run_info.json
