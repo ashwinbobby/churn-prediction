@@ -3,11 +3,14 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
+TARGET = "Churn"
+DROP_COLS = ["customerID"]
 
-def load_data(path):
+def load_data(path="data/raw/telco_churn.csv"):
     df = pd.read_csv(path)
-    df.drop(columns=["customerID"])
-    df["Churn"] = df["Churn"].map({"Yes": 1, "No":0})
+    df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
+    df = df.drop(columns=DROP_COLS)   # <-- must reassign df here
+    df[TARGET] = df[TARGET].map({"Yes": 1, "No": 0})
     return df
 
 def build_preprocessor(df):
@@ -31,4 +34,4 @@ def build_preprocessor(df):
         ("cat", cat_pipe, cat_cols)
     ])
 
-    return preprocessor, num_cols, cat_cols
+    return preprocessor

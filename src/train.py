@@ -19,7 +19,7 @@ y = df["Churn"].values
 X_train_raw, X_test_raw, y_train_full, y_test = train_test_split(
     X, y, test_size=0.2, stratify=y, random_state=42
 )
-preprocessor, num_cols, cat_cols = build_preprocessor(df)
+preprocessor = build_preprocessor(df)
 X_train_full = preprocessor.fit_transform(X_train_raw)
 X_test = preprocessor.transform(X_test_raw)
 
@@ -119,7 +119,7 @@ cost_curve_path = plot_cost_curves(train_costs, val_costs)
 total_epochs_run = len(train_costs)
 
 probs = model.predict_proba(X_test)[:, 1]
-preds = (probs >= 0.5).astype(int)
+preds = (probs >= 0.4).astype(int)
 
 metrics = {
     "test_accuracy": accuracy_score(y_test, preds),

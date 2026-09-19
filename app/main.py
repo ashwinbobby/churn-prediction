@@ -1,10 +1,18 @@
-# app/main.py
 import joblib
 import pandas as pd
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI(title="Churn Prediction API (Logistic Regression)")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # your Next.js dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 preprocessor = joblib.load("models/preprocessor.pkl")
 model = joblib.load("models/churn_model.pkl")
@@ -43,5 +51,5 @@ def predict(customer: Customer):
     prob = float(model.predict_proba(X)[0, 1])
     return {
         "churn_probability": round(prob, 4),
-        "churn_prediction": bool(prob >= 0.5),
+        "churn_prediction": bool(prob >= 0.4),
     }
