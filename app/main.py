@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 preprocessor = joblib.load("models/preprocessor.pkl")
-model = joblib.load("models/churn_model.pkl")
+model = joblib.load("models/churn_model.keras")
 
 class Customer(BaseModel):
     gender: str
