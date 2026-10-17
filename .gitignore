@@ -9,3 +9,4 @@ mlruns/
 !data/processed/.gitkeep
 *.png
 run_info.json
+notebooks/
