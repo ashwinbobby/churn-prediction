@@ -69,7 +69,8 @@ train/validation. Training runs up to 100 epochs, batch size 32, early stopping 
 `val_loss` with patience 8.
 
 ## Results
-**Note** - The selected model can be viewed inside the mlflow ui, it will have a tag called "selected:true"
+**Note** - The selected model can be viewed inside the mlflow ui, it will have a tag called "selected:true".
+Presented here for reference too...
 Selected run `a1e-05_lr0.01_cw1` (`e209e1c5b766442b9eb9bbd72e77b1dc`) — test-set metrics:
 
 | Metric    | Value  |
