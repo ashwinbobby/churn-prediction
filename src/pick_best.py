@@ -8,8 +8,14 @@ from preprocessing import load_data
 
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
-runs = mlflow.search_runs(experiment_names=["telco-churn"],
-                          order_by=["metrics.val_log_loss ASC"])
+runs = mlflow.search_runs(
+    experiment_names=["telco-churn"],
+    order_by=[
+        "metrics.val_recall DESC",
+        "metrics.val_precision DESC",
+        "metrics.val_auc DESC",
+    ],
+)
 cols = ["run_id", "params.alpha", "params.lr", "params.use_class_weight",
         "metrics.val_log_loss", "metrics.val_auc"]
 print(runs[cols].head())

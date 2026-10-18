@@ -1,8 +1,6 @@
 venv/
 __pycache__/
 *.pyc
-data/raw/*
-data/processed/*
 mlruns/
 .env
 !data/raw/.gitkeep
@@ -10,3 +8,4 @@ mlruns/
 *.png
 run_info.json
 notebooks/
+mlflow.db
